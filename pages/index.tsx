@@ -10,13 +10,13 @@ import Header from "../components/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const [animate, setAnimate] = useState<Boolean>(false);
   const [isOpenAuthTab, setIsOpenAuthTab] = useState<Boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<Boolean>(false);
-  const [navLinks, setNavLinks] = useState<String[]>(["Login"]);
+  const [navLinks, setNavLinks] = useState<string[]>(["Login"]);
 
   const handleForm = () => {
-    setIsOpen((gate) => !gate);
+    setAnimate((gate) => !gate);
   };
 
   const toggleDarkMode = () => {
@@ -44,7 +44,7 @@ export default function Home() {
                   href={`/`}
                   key={index}
                   className={`border p-6 w-fit h-fit rounded-full hover:bg-slate-400 hover:text-slate-900 hover:border-slate-900 active:bg-slate-500 active:p-7 ${
-                    isOpen ? "animate-fade" : null
+                    animate ? "animate-fade" : null
                   }`}
                   onClick={handleForm}
                   onAnimationEnd={() => {

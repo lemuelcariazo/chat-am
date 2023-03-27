@@ -1,5 +1,14 @@
 type HeaderProps = {
-  navLinks: String[];
+  navLinks: string[];
   setNavLinks: any;
 };
-export { type HeaderProps };
+
+interface AUTH {
+  email?: string;
+  confirmEmail?: string;
+  username: string;
+  password: string;
+  confirmPassword?: string;
+}
+
+export { type HeaderProps, type AUTH, type UseVaultProps };
