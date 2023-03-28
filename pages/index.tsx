@@ -6,21 +6,18 @@ import { Key, useState } from "react";
 // components
 import AuthForm from "@/components/authForm";
 import Header from "../components/Header";
+import ThemeToggleButton from "@/components/ThemeToggleButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [animate, setAnimate] = useState<Boolean>(false);
-  const [isOpenAuthTab, setIsOpenAuthTab] = useState<Boolean>(false);
-  const [isDarkMode, setIsDarkMode] = useState<Boolean>(false);
+  const [animate, setAnimate] = useState<boolean>(false);
+  const [isOpenAuthTab, setIsOpenAuthTab] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [navLinks, setNavLinks] = useState<string[]>(["Login"]);
 
   const handleForm = () => {
     setAnimate((gate) => !gate);
-  };
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prev) => !prev);
   };
 
   return (
@@ -33,13 +30,12 @@ export default function Home() {
       </Head>
       <Header navLinks={navLinks} setNavLinks={setNavLinks} />
       <main className="flex justify-center items-center flex-col w-full h-screen dark:bg-slate-800 dark:text-slate-100 text-slate-900 font-black">
-        {isOpenAuthTab ? (
-          <AuthForm />
-        ) : (
-          navLinks.map((link: String, index: Key) => {
-            return (
-              <>
-                <h1>Skwakernils</h1>
+        <div>
+          {isOpenAuthTab ? (
+            <AuthForm />
+          ) : (
+            navLinks.map((link: string, index: Key) => {
+              return (
                 <Link
                   href={`/`}
                   key={index}
@@ -54,16 +50,16 @@ export default function Home() {
                 >
                   {link}
                 </Link>
-              </>
-            );
-          })
-        )}
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={toggleDarkMode}
-        >
-          Dark Mode
-        </button>
+              );
+            })
+          )}
+        </div>
+
+        <ThemeToggleButton
+          buttonName={isDarkMode ? "Toggle Light Mode" : "Toggle Dark Mode"}
+          isToggle={isDarkMode}
+          setIsToggle={setIsDarkMode}
+        />
       </main>
     </div>
   );

@@ -13,6 +13,11 @@ const AuthForm: React.FC = () => {
     });
   };
 
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("It is working");
+  };
+
   return (
     <>
       <section
@@ -22,12 +27,15 @@ const AuthForm: React.FC = () => {
       >
         <div className="w-full flex justify-end items-center h-4">
           <div
-            className="border mr-1 mt-1 w-10 bg-red-900 h-2 rounded-2xl active:bg-slate-800 hover:h-3"
+            className="border mr-1 mt-1 w-10 h-2 rounded-2xl active:bg-slate-500 hover:border-green-500"
             onClick={handleAnimate}
           ></div>
         </div>
         <h1 className="m-4">Login Account</h1>
-        <div className="flex justify-center items-center flex-col gap-3 m-2">
+        <form
+          onSubmit={handleLogin}
+          className="flex justify-center items-center flex-col gap-5 m-2 p-2"
+        >
           <input
             type="text"
             value={auth.username}
@@ -56,8 +64,13 @@ const AuthForm: React.FC = () => {
               });
             }}
           />
-        </div>
-        <button>X</button>
+          <button
+            type="submit"
+            className="p-2 rounded-3xl flex justify-center items-center hover:border-green-500 border"
+          >
+            <h1 className="text-center">Login</h1>
+          </button>
+        </form>
       </section>
     </>
   );
