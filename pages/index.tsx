@@ -37,7 +37,7 @@ export default function Home() {
         <div>
           {isRemoveTag ? null : (
             <section className="flex justify-center items-center flex-col">
-              <div className="max-w-md text-justify">
+              <div className="max-w-md text-justify select-none">
                 Welcome to Chat-am, the easy-to-use chat app that helps you stay
                 connected with friends, family, and colleagues. With Chatam, you
                 can chat in real-time, create channels, share files, and more.
