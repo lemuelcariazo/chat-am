@@ -1,6 +1,6 @@
 type HeaderProps = {
   navLinks: string[];
-  setNavLinks: any;
+  setNavLinks: Dispatch<SetStateAction<string>>;
 };
 
 type BTNPROPTYPE = {
@@ -17,4 +17,10 @@ interface AUTH {
   confirmPassword?: string;
 }
 
-export { type HeaderProps, type AUTH, type BTNPROPTYPE };
+interface AUTHFORMPROPS {
+  animate: boolean;
+  setAnimate: Dispatch<SetStateAction<boolean>>;
+  setIsRemoveTag: Dispatch<SetStateAction<boolean>>;
+}
+
+export { type HeaderProps, type AUTH, type BTNPROPTYPE, type AUTHFORMPROPS };

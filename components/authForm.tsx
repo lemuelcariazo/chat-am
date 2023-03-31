@@ -1,17 +1,15 @@
 import React, { ComponentProps, useState } from "react";
-import { AUTH } from "@/types/types";
-const AuthForm: React.FC = () => {
+import { AUTH, AUTHFORMPROPS } from "@/types/types";
+
+const AuthForm: React.FC<AUTHFORMPROPS> = ({
+  animate,
+  setAnimate,
+  setIsRemoveTag,
+}) => {
   const [auth, setAuth] = useState<AUTH>({
     username: "",
     password: "",
   });
-  const [animate, setAnimate] = useState<Boolean>(false);
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
-  const handleAnimate = () => {
-    setAnimate((prevAnimate) => {
-      return !prevAnimate;
-    });
-  };
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,13 +20,18 @@ const AuthForm: React.FC = () => {
     <>
       <section
         className={`${
-          animate && "animate-fade"
+          !animate && "animate-fade"
         } bg-slate-700 text-slate-100 flex justify-center items-center flex-col rounded-md select-none`}
+        onAnimationEnd={() => {
+          setIsRemoveTag((remove: boolean) => !remove);
+        }}
       >
-        <div className="w-full flex justify-end items-center h-4">
+        <div className="w-full flex justify-end items-center h-10">
           <div
-            className="border mr-1 mt-1 w-10 h-2 rounded-2xl active:bg-slate-500 hover:border-green-500"
-            onClick={handleAnimate}
+            className="mr-2 border w-5 h-5 rounded-full active:bg-slate-500 hover:border-green-500"
+            onClick={() => {
+              setAnimate((animate: boolean) => !animate);
+            }}
           ></div>
         </div>
         <h1 className="m-4">Login Account</h1>
@@ -70,6 +73,9 @@ const AuthForm: React.FC = () => {
           >
             <h1 className="text-center">Login</h1>
           </button>
+          <p className="text-xs w-full text-end  hover:text-blue-200">
+            create account ?
+          </p>
         </form>
       </section>
     </>
