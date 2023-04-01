@@ -1,7 +1,10 @@
 import React, { ComponentProps, useState } from "react";
 import { AUTH, AUTHFORMPROPS } from "@/types/types";
 
-const AuthForm: React.FC<AUTHFORMPROPS> = ({
+// components
+import X from "./X";
+
+const LoginForm: React.FC<AUTHFORMPROPS> = ({
   animate,
   setAnimate,
   setIsRemoveTag,
@@ -26,14 +29,15 @@ const AuthForm: React.FC<AUTHFORMPROPS> = ({
           setIsRemoveTag((remove: boolean) => !remove);
         }}
       >
-        <div className="w-full flex justify-end items-center h-10">
+        {/* <div className="w-full flex justify-end items-center h-10">
           <div
             className="mr-2 border w-5 h-5 rounded-full active:bg-slate-500 hover:border-green-500"
             onClick={() => {
               setAnimate((animate: boolean) => !animate);
             }}
           ></div>
-        </div>
+        </div> */}
+        <X setAnimate={setAnimate} />
         <h1 className="m-4">Login Account</h1>
         <form
           onSubmit={handleLogin}
@@ -81,4 +85,4 @@ const AuthForm: React.FC<AUTHFORMPROPS> = ({
     </>
   );
 };
-export default AuthForm;
+export default LoginForm;

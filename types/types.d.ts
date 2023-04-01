@@ -18,9 +18,20 @@ interface AUTH {
 }
 
 interface AUTHFORMPROPS {
-  animate: boolean;
+  animate?: boolean;
   setAnimate: Dispatch<SetStateAction<boolean>>;
-  setIsRemoveTag: Dispatch<SetStateAction<boolean>>;
+  setIsRemoveTag?: Dispatch<SetStateAction<boolean>>;
 }
 
-export { type HeaderProps, type AUTH, type BTNPROPTYPE, type AUTHFORMPROPS };
+type COMMENTS = {
+  id: number;
+  comment: string;
+};
+
+export {
+  type HeaderProps,
+  type AUTH,
+  type BTNPROPTYPE,
+  type AUTHFORMPROPS,
+  type COMMENTS,
+};
