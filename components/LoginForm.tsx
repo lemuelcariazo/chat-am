@@ -29,14 +29,6 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
           setIsRemoveTag((remove: boolean) => !remove);
         }}
       >
-        {/* <div className="w-full flex justify-end items-center h-10">
-          <div
-            className="mr-2 border w-5 h-5 rounded-full active:bg-slate-500 hover:border-green-500"
-            onClick={() => {
-              setAnimate((animate: boolean) => !animate);
-            }}
-          ></div>
-        </div> */}
         <X setAnimate={setAnimate} />
         <h1 className="m-4">Login Account</h1>
         <form
