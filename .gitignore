@@ -37,4 +37,4 @@ next-env.d.ts
 
 # md
 prisma.md
-.env
+*.env
