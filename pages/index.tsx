@@ -4,14 +4,13 @@ import { useState } from "react";
 
 // components
 import Layout from "@/components/Layout";
+import WelcomeMsg from "@/components/WelcomeMsg";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
   return (
-    <div className={`${isDarkMode ? "dark" : ""} dark`}>
+    <>
       <Head>
         <title>CHAT-AM</title>
         <meta
@@ -21,7 +20,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/fireIcon.svg" />
       </Head>
-      <Layout />
-    </div>
+
+      <Layout>
+        <WelcomeMsg />
+      </Layout>
+    </>
   );
 }

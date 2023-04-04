@@ -11,6 +11,8 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
   setAnimate,
   setIsRemoveTag,
 }) => {
+  const [btnStyle, setBtnStyle] = useState<string>("");
+
   const router = useRouter();
   const [auth, setAuth] = useState<AUTH>({
     username: "",
@@ -57,6 +59,12 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
         <form
           onSubmit={handleLogin}
           className="flex justify-center items-center flex-col gap-5 m-2 p-2"
+          onKeyDown={(e: React.KeyboardEvent) => {
+            e.key === "Enter" && setBtnStyle("bg-slate-100 text-black");
+          }}
+          onKeyUp={(e: React.KeyboardEvent) => {
+            e.key === "Enter" && setBtnStyle("");
+          }}
         >
           <input
             type="text"
@@ -88,7 +96,7 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
           />
           <button
             type="submit"
-            className="p-2 rounded-3xl flex justify-center items-center hover:border-green-500 border"
+            className={`${btnStyle} p-2 rounded-3xl flex justify-center items-center hover:border-green-500 border`}
           >
             <h1 className="text-center">Login</h1>
           </button>

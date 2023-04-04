@@ -1,7 +1,10 @@
+import { SetStateAction } from "react";
+
 type HeaderProps = {
   navLinks: string[];
   setNavLinks: Dispatch<SetStateAction<string>>;
   isAuth: boolean;
+  setIsDarkMode?: Dispatch<SetStateAction<boolean>>;
 };
 
 type BTNPROPTYPE = {
@@ -20,7 +23,7 @@ interface AUTH {
 
 interface AUTHFORMPROPS {
   animate?: boolean;
-  setAnimate: Dispatch<SetStateAction<boolean>>;
+  setAnimate?: Dispatch<SetStateAction<boolean>>;
   setIsRemoveTag?: Dispatch<SetStateAction<boolean>>;
 }
 

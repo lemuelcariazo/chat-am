@@ -22,7 +22,7 @@ export default async function handler(
       try {
         const { user }: any = await loginUser(email, res);
 
-        const verifyPassword = await comparePassword(password, user.password); // has error
+        const verifyPassword = await comparePassword(password, user.password);
 
         if (!verifyPassword) {
           return res.status(401).json({
@@ -35,8 +35,8 @@ export default async function handler(
 
         return res.status(200).json({
           user: {
-            id: user.id, // has error
-            email: user.email, // has error
+            id: user.id,
+            email: user.email,
           },
           message: "login succesfully",
         });
