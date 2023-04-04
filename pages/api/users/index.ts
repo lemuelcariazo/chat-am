@@ -20,8 +20,9 @@ export default async function handler(
         });
       }
       try {
-        const user = await loginUser(email, res);
-        const verifyPassword = await comparePassword(password, user.password);
+        const { user }: any = await loginUser(email, res);
+
+        const verifyPassword = await comparePassword(password, user.password); // has error
 
         if (!verifyPassword) {
           return res.status(401).json({
@@ -31,10 +32,11 @@ export default async function handler(
 
         const token = createJwt(user);
         createCookie(token, res);
+
         return res.status(200).json({
           user: {
-            id: user.id,
-            email: user.email,
+            id: user.id, // has error
+            email: user.email, // has error
           },
           message: "login succesfully",
         });

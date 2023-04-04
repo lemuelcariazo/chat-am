@@ -13,11 +13,11 @@ export const getUsers = async () => {
   }
 };
 
-export const loginUser = async (username: any, res: NextApiResponse) => {
+export const loginUser = async (email: string, res: NextApiResponse) => {
   try {
     const user = await prisma.users.findUnique({
       where: {
-        email: username,
+        email: email,
       },
     });
 
@@ -27,7 +27,7 @@ export const loginUser = async (username: any, res: NextApiResponse) => {
       });
     }
 
-    return user;
+    return { user };
   } catch (error) {
     return { error };
   }
