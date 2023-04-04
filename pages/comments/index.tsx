@@ -1,5 +1,4 @@
-import React, { useEffect, use, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 type COMMENTS = {
   id: number;

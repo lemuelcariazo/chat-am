@@ -1,11 +1,27 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model userlogs {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  v         Int      @map("__v")
+  ipAddress String
+  timestamp DateTime @db.Date
+  user      String   @db.ObjectId
+}
+
+model users {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  v         Int      @map("__v")
+  createdAt DateTime @db.Date
+  email     String   @unique(map: "email_1")
+  loggedIn  Boolean
+  password  String   @unique(map: "password_1")
+  updatedAt DateTime @db.Date
+  username  String
 }

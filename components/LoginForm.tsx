@@ -1,4 +1,6 @@
-import React, { ComponentProps, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+// types
 import { AUTH, AUTHFORMPROPS } from "@/types/types";
 
 // components
@@ -9,14 +11,35 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
   setAnimate,
   setIsRemoveTag,
 }) => {
+  const router = useRouter();
   const [auth, setAuth] = useState<AUTH>({
     username: "",
     password: "",
   });
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    const requestBody = JSON.stringify({
+      email: auth.username,
+      password: auth.password,
+    });
+
     e.preventDefault();
-    console.log("It is working");
+    1;
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: requestBody,
+      });
+      if (response.status === 200) {
+        localStorage.setItem("auth", String(true));
+        setAnimate((animate: string) => !animate);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

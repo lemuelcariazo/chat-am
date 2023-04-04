@@ -1,6 +1,7 @@
 type HeaderProps = {
   navLinks: string[];
   setNavLinks: Dispatch<SetStateAction<string>>;
+  isAuth: boolean;
 };
 
 type BTNPROPTYPE = {
@@ -28,10 +29,23 @@ type COMMENTS = {
   comment: string;
 };
 
+interface USER {
+  id?: string;
+  email?: string;
+  password?: string;
+}
+
+interface NAV {
+  navLinks: string[];
+  setNavLinks: Dispatch<SetStateAction<string>>;
+}
+
 export {
   type HeaderProps,
   type AUTH,
   type BTNPROPTYPE,
   type AUTHFORMPROPS,
   type COMMENTS,
+  type USER,
+  type NAV,
 };
