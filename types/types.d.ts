@@ -3,7 +3,6 @@ import { SetStateAction } from "react";
 type HeaderProps = {
   navLinks: string[];
   setNavLinks: Dispatch<SetStateAction<string>>;
-  isAuth: boolean;
   setIsDarkMode?: Dispatch<SetStateAction<boolean>>;
 };
 

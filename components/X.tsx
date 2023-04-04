@@ -34,5 +34,3 @@ const X: React.FC<AUTHFORMPROPS> = ({ setAnimate }) => {
 };
 
 export default X;
-// h-[8px] w-6 block rounded-lg origin-center
-// h-[8px] w-6 block rounded-lg origin-center

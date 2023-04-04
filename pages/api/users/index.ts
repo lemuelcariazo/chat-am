@@ -10,7 +10,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  res.setHeader("allow", ["POST"]);
+  res.setHeader("allow", ["POST", "GET"]);
   switch (req.method) {
     case "POST":
       const { email, password } = req.body;
@@ -42,9 +42,10 @@ export default async function handler(
         });
       } catch (e) {
         res.status(500).json({
-          message: "Internal server error eto yonh",
+          message: "Internal server error",
         });
       }
+
     default:
       res.status(405).json({ message: `Method '${req.method}' not allowed` });
       break;

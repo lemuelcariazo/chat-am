@@ -12,7 +12,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Header
         navLinks={navLinks}
         setNavLinks={setNavLinks}
-        isAuth={false}
         setIsDarkMode={setIsDarkMode}
       />
       ;

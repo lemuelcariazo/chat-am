@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LoginForm from "@/components/LoginForm";
+import Typewriter from "typewriter-effect";
 
 export default function WelcomeMsg() {
   const [isRemoveTag, setIsRemoveTag] = useState<boolean>(false);
@@ -15,13 +16,24 @@ export default function WelcomeMsg() {
     <>
       {isRemoveTag ? null : (
         <section className="flex justify-center items-center flex-col">
-          <div className="p-2 overflow-hidden max-w-md max-h-[17em] text-justify select-none opacity-70 m-6">
-            Welcome to Chat-am, the easy-to-use chat app that helps you stay
-            connected with friends, family, and colleagues. With Chatam, you can
-            chat in real-time, create channels, share files, and more. We
-            prioritize your privacy and security, so you can feel confident that
-            your conversations and personal information are always safe and
-            secure. Thanks for choosing Chatam as your go-to chat app!
+          <div className="p-2 overflow-hidden max-w-md max-h-[17em] text-justify select-none m-6">
+            <Typewriter
+              onInit={(typewriter) => {
+                typewriter
+                  .typeString(
+                    "Chat-am is an easy-to-use and secure chat app for staying connected with friends, family, and colleagues."
+                  )
+
+                  .pauseFor(50)
+                  .changeDeleteSpeed(50)
+                  .deleteAll()
+                  .typeString(
+                    "Chat in real-time, create channels, and share files with confidence. Thanks for choosing Chat-am!"
+                  )
+
+                  .start();
+              }}
+            />
           </div>
           <div className="h-20 w-20 flex justify-center items-center">
             <button
