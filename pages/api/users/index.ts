@@ -1,16 +1,39 @@
-import { loginUser } from "@/lib/prisma/users";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
 // test
-import { createJwt } from "@/helper/jwt";
-import { comparePassword } from "@/helper/bcrypt";
-import { createCookie } from "@/helper/cookie";
+import { createJwt, verifyJwt } from "@/lib/helper/jwt";
+import { comparePassword } from "@/lib/helper/bcrypt";
+import { createCookie } from "@/lib/helper/cookie";
+import { loginUser } from "@/lib/prisma/users";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  res.setHeader("allow", ["POST", "GET"]);
+const authenticate =
+  (handler: NextApiHandler) =>
+  async (req: NextApiRequest, res: NextApiResponse) => {
+    if (req.method === "GET" || req.method === "POST") {
+      const isVerifiedToken = await verifyJwt(req, res);
+      try {
+        if (isVerifiedToken) {
+          return res.status(200).json({
+            authenticated: true,
+            data: isVerifiedToken,
+          });
+        }
+        // if token is invalid or not provided proceed to handle request
+        return handler(req, res);
+      } catch (e) {
+        res.json({
+          message: e,
+        });
+      }
+    } else {
+      return res
+        .status(405)
+        .json({ message: `Method '${req.method}' not allowed` });
+    }
+  };
+
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  res.setHeader("allow", ["POST", "DELETE"]);
   switch (req.method) {
     case "POST":
       const { email, password } = req.body;
@@ -20,13 +43,11 @@ export default async function handler(
         });
       }
       try {
-        const { user }: any = await loginUser(email, res);
-
-        const verifyPassword = await comparePassword(password, user.password);
-
-        if (!verifyPassword) {
-          return res.status(401).json({
-            message: "Unauthorized",
+        const { user }: any = await loginUser(email);
+        const verifyPwd = await comparePassword(password, user.password);
+        if (!verifyPwd) {
+          return res.status(404).json({
+            message: "unable to login",
           });
         }
 
@@ -45,9 +66,19 @@ export default async function handler(
           message: "Internal server error",
         });
       }
+    case "DELETE":
+      console.log("handle delete");
+    // try {
+    //   // await deleteCookie(res);
+    //   return res.status(200).send("Logout Successfully");
+    // } catch (e) {
+    //   res.status(500).send("Internal server error", e);
+    // }
 
     default:
       res.status(405).json({ message: `Method '${req.method}' not allowed` });
       break;
   }
 }
+
+export default authenticate(handler);

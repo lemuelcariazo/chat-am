@@ -1,10 +1,13 @@
 import { NAV } from "@/types/types";
+import Layout from "@/components/Layout";
+import Link from "next/link";
 
 const User: React.FC<NAV> = () => {
   return (
-    <section className="dark:bg-slate-900 dark:text-black h-screen">
-      <h1 className="">USER</h1>
-    </section>
+    <Layout>
+      Welcome User
+      <Link href={"/"}>goto Home</Link>
+    </Layout>
   );
 };
 export default User;

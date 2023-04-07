@@ -1,9 +1,9 @@
-import { NextApiResponse } from "next";
 import prisma from "./index";
+import { users } from "@prisma/client";
 
 export const getUsers = async () => {
   try {
-    const users = await prisma.users.findMany();
+    const users: users[] = await prisma.users.findMany();
     if (!users) {
       return "no data";
     }
@@ -13,19 +13,13 @@ export const getUsers = async () => {
   }
 };
 
-export const loginUser = async (email: string, res: NextApiResponse) => {
+export const loginUser = async (email: string) => {
   try {
-    const user = await prisma.users.findUnique({
+    const user: users | null = await prisma.users.findUnique({
       where: {
         email: email,
       },
     });
-
-    if (!user) {
-      return res.status(404).json({
-        message: "unable to login",
-      });
-    }
 
     return { user };
   } catch (error) {

@@ -8,8 +8,37 @@ import WelcomeMsg from "@/components/WelcomeMsg";
 
 const inter = Inter({ subsets: ["latin"] });
 
+interface UserData {
+  id: string;
+  email: string;
+}
+
 export default function Home() {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [value, setValue] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch("/api/users", {
+        method: "GET",
+      });
+      const json = await response.json();
+      if (response.status === 200) {
+        console.log(json.data);
+        setValue(json);
+      }
+    } catch (e) {
+      console.log({
+        message: "Restricted",
+        e,
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log("side effect rerender");
+    fetchUser();
+  }, []);
 
   return (
     <>
@@ -22,8 +51,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/fireIcon.svg" />
       </Head>
-
-      <Layout>{isAuth === true ? <h1>Hello</h1> : <WelcomeMsg />}</Layout>
+      {isLoading ? (
+        "loading"
+      ) : (
+        <Layout>{value ? `Hello` : <WelcomeMsg />}</Layout>
+      )}
     </>
   );
 }

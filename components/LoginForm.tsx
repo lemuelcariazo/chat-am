@@ -11,9 +11,9 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
   setAnimate,
   setIsRemoveTag,
 }) => {
+  const router = useRouter();
   const [btnStyle, setBtnStyle] = useState<string>("");
 
-  const router = useRouter();
   const [auth, setAuth] = useState<AUTH>({
     username: "",
     password: "",
@@ -26,7 +26,7 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
     });
 
     e.preventDefault();
-    1;
+
     try {
       const response = await fetch("/api/users", {
         method: "POST",
@@ -36,11 +36,16 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
         body: requestBody,
       });
       if (response.status === 200) {
-        localStorage.setItem("auth", String(true));
+        
         setAnimate((animate: string) => !animate);
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      setAuth({
+        username: "",
+        password: "",
+      });
     }
   };
 
@@ -81,7 +86,7 @@ const LoginForm: React.FC<AUTHFORMPROPS> = ({
             }}
           />
           <input
-            type="text"
+            type="password"
             value={auth.password}
             placeholder="password"
             className="px-4 py-2 text-left rounded-2xl text-slate-900"
