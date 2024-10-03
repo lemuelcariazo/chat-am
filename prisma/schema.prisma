@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model userlogs {
+model user_logs {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   v         Int      @map("__v")
   ipAddress String
@@ -15,7 +15,7 @@ model userlogs {
   user      String   @db.ObjectId
 }
 
-model users {
+model user {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   v         Int      @map("__v")
   createdAt DateTime @db.Date
