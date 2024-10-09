@@ -3,7 +3,7 @@ import { users } from "@prisma/client";
 
 export const getUsers = async () => {
   try {
-    const users: users[] = await prisma.users.findMany();
+    const users: users[] = await prisma.user.findMany();
     if (!users) {
       return "no data";
     }
@@ -15,7 +15,7 @@ export const getUsers = async () => {
 
 export const loginUser = async (email: string) => {
   try {
-    const user: users | null = await prisma.users.findUnique({
+    const user: users | null = await prisma.user.findUnique({
       where: {
         email: email,
       },
